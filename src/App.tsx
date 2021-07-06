@@ -1,6 +1,9 @@
 import React, { useReducer, useEffect } from 'react';
 import { Form } from './containers';
 import { getCompanies } from './api';
+import Table from './components/Table';
+import { tableFields } from './constants';
+import { withLoader } from './containers/withLoader';
 
 interface IState {
     companies: { id: number, name: string }[],
@@ -33,7 +36,7 @@ function reducer(state: IState, action) {
 
 const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { companies } = state;
+  const { companies, prices, loading } = state;
 
   const fetchCompanies = async () => {
     const data = await getCompanies();
@@ -43,10 +46,12 @@ const App = () => {
   useEffect(() => {
     fetchCompanies();
   }, []);
+  const TableWithLoader = withLoader(Table);
 
   return (
     <>
       <Form dispatch={dispatch} companies={companies} />
+      <TableWithLoader items={prices} fields={tableFields} isLoading={loading} />
     </>
   );
 };

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
 import { oldDateInMs, formatDate, getTime } from '../utils/dates';
 import { getPrices } from '../api';
-import { IForm, IErrors, ICompany } from '../types';
+import { IFormProps, IErrors, ICompany } from '../types';
 
 const initialValues = {
   startDate: formatDate(new Date(oldDateInMs)),
@@ -24,7 +24,7 @@ const validateForm = (values) => {
   return errors;
 };
 
-export const Form = ({ dispatch, companies }:IForm) => {
+export const Form = ({ dispatch, companies }:IFormProps) => {
   const onSubmit = () => {
 
   };

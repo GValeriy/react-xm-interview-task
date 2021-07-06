@@ -38,5 +38,7 @@ module.exports = {
         some: ['nesting', 'id'],
       },
     }],
+    'react/no-array-index-key': 'off',
+    'react/jsx-props-no-spreading': 'off',
   },
 };

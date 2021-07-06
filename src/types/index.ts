@@ -22,9 +22,14 @@ export interface IPrice {
     volume: number,
 }
 
-export interface IForm {
+export interface IFormProps {
     /* eslint-disable no-unused-vars */
     dispatch: (action:{ type: string, payload: any}) => void,
     /* eslint-enable no-unused-vars */
     companies: []
+}
+
+export interface ITableProps {
+    items: [],
+    fields: string[]
 }
