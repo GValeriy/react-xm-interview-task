@@ -1,28 +1,19 @@
 import React, { useReducer, useEffect } from 'react';
-import { Form } from './containers';
+import { Form, withLoader } from './containers';
 import { getCompanies, getApiKeys } from './api';
 import Table from './components/Table';
 import Chart from './components/Chart';
 import { tableFields, tableLoadingMessage, chartLoadingMessage } from './constants';
-import { withLoader } from './containers/withLoader';
+import { IAppState } from './types';
 
-interface IState {
-    companies: { id: number, name: string }[],
-    prices: { id: number, name: string }[],
-    loading: boolean,
-    error: boolean,
-    config: {}
-}
-
-const initialState:IState = {
+const initialState:IAppState = {
   companies: [],
   prices: [],
   loading: false,
-  error: false,
   config: {},
 };
 
-function reducer(state: IState, action) {
+function reducer(state: IAppState, action) {
   const { payload, type } = action;
   switch (type) {
     case 'companies':
@@ -54,9 +45,13 @@ const App = () => {
     dispatch({ type: 'config', payload: data || {} });
   };
 
+  const initialRequest = async () => {
+    await fetchApiKeys();
+    await fetchCompanies();
+  };
+
   useEffect(() => {
-    fetchCompanies();
-    fetchApiKeys();
+    initialRequest();
   }, []);
 
   const TableWithLoader = withLoader(Table);

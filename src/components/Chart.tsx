@@ -12,7 +12,7 @@ import {
 import { formatDate } from '../utils/dates';
 import { IChartProps } from '../types';
 
-const Chart = memo(({ data }:IChartProps) => {
+export const Chart = memo(({ data }:IChartProps) => {
   if (!data.length) {
     return <div>Empty Chart</div>;
   }

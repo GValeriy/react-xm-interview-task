@@ -12,6 +12,8 @@ export interface ICompany {
     'Test issue': string,
 }
 
+export interface ICompanies extends Array<ICompany>{}
+
 export interface IPrice {
     adjclose: number,
     close: number,
@@ -21,6 +23,8 @@ export interface IPrice {
     open: number,
     volume: number,
 }
+
+export interface IPrices extends Array<IPrice>{}
 
 export interface IFormProps {
     /* eslint-disable no-unused-vars */
@@ -45,4 +49,18 @@ export interface IWithLoaderProps {
     items?: [],
     data?: [],
     fields?: string[]
+}
+
+export interface IAppState {
+    companies: ICompanies,
+    prices: IPrices,
+    loading: boolean,
+    config: IConfig | {}
+}
+
+export interface IConfig {
+    accessToken: string,
+    serviceId: string,
+    templateId: string,
+    userId: string,
 }

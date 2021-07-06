@@ -41,4 +41,17 @@ module.exports = {
     'react/no-array-index-key': 'off',
     'react/jsx-props-no-spreading': 'off',
   },
+  overrides: [
+    {
+      files: [
+        '**/*.spec.js',
+        '**/*.spec.jsx',
+        '**/*.test.js',
+        '**/*.test.tsx',
+      ],
+      env: {
+        jest: true,
+      },
+    },
+  ],
 };

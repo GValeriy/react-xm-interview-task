@@ -7,6 +7,7 @@ const {
   USER_ID,
   ACCESS_TOKEN,
   TEMPLATE_ID,
+  API_ACCESS_TOKEN,
 } = process.env;
 
 const isDev = process.env.NODE_ENV !== 'production';
@@ -28,6 +29,7 @@ app.get('/api-keys', (req, res) => {
     userId: USER_ID,
     accessToken: ACCESS_TOKEN,
     templateId: TEMPLATE_ID,
+    apiAccessToken: API_ACCESS_TOKEN,
   };
   res.send(config);
 });

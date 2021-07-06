@@ -1,7 +1,7 @@
 import React from 'react';
 import { ITableProps } from '../types';
 
-const Table = ({ items, fields }:ITableProps) => {
+export const Table = ({ items, fields }:ITableProps) => {
   if (!items.length) {
     return <div>Empty table</div>;
   }
