@@ -26,7 +26,8 @@ export interface IFormProps {
     /* eslint-disable no-unused-vars */
     dispatch: (action:{ type: string, payload: any}) => void,
     /* eslint-enable no-unused-vars */
-    companies: []
+    companies: [],
+    config: {}
 }
 
 export interface ITableProps {

@@ -1,9 +1,10 @@
 import axios from 'axios';
+import { init, send } from 'emailjs-com';
 
 /* eslint-disable no-console */
 export const logServiceErrors = (error, errorInfo?) => console.error(error, errorInfo);
 
-const makeRequest = (baseURL, url, params) => {
+const makeRequest = (baseURL, url, params?) => {
   const instance = axios.create({
     baseURL,
   });
@@ -28,4 +29,21 @@ export const getPrices = (url = '', params = {}) => {
 export const getCompanies = (url = '', params = {}) => {
   const baseURL = 'https://pkgstore.datahub.io/core/nasdaq-listings/nasdaq-listed_json/data/a5bc7580d6176d60ac0b2142ca8d7df6/nasdaq-listed_json.json';
   return makeRequest(baseURL, url, params);
+};
+
+export const sendEmail = (config, templateParams) => {
+  init(config.userId);
+  send(
+    config.serviceId,
+    config.templateId,
+    templateParams,
+  )
+    .catch((error) => {
+      logServiceErrors(error);
+    });
+};
+
+export const getApiKeys = () => {
+  const baseURL = 'http://localhost:5000';
+  return makeRequest(baseURL, '/api-keys');
 };

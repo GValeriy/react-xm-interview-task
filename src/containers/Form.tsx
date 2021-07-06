@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
+
 import { oldDateInMs, formatDate, getTime } from '../utils/dates';
-import { getPrices } from '../api';
+import { getPrices, sendEmail } from '../api';
 import { IFormProps, IErrors, ICompany } from '../types';
 
 const initialValues = {
@@ -24,9 +25,19 @@ const validateForm = (values) => {
   return errors;
 };
 
-export const Form = ({ dispatch, companies }:IFormProps) => {
-  const onSubmit = () => {
+export const Form = ({ config, dispatch, companies }:IFormProps) => {
+  const onSubmit = ({
+    email, startDate, endDate, companyName,
+  }) => {
+    const subject = companies.find((company: ICompany) => company.Symbol === companyName)?.['Company Name'];
+    const templateParams = {
+      to_email: email,
+      subject,
+      startDate,
+      endDate,
+    };
 
+    sendEmail(config, templateParams);
   };
 
   const formik = useFormik({
@@ -92,6 +103,7 @@ export const Form = ({ dispatch, companies }:IFormProps) => {
         name="companyName"
         value={formik.values.companyName}
         onChange={formik.handleChange}
+        required
       >
         <option disabled value="">{defaultOptionLabel}</option>
         {selectOptions}
