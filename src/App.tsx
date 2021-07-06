@@ -2,7 +2,8 @@ import React, { useReducer, useEffect } from 'react';
 import { Form } from './containers';
 import { getCompanies } from './api';
 import Table from './components/Table';
-import { tableFields } from './constants';
+import Chart from './components/Chart';
+import { tableFields, tableLoadingMessage, chartLoadingMessage } from './constants';
 import { withLoader } from './containers/withLoader';
 
 interface IState {
@@ -46,12 +47,24 @@ const App = () => {
   useEffect(() => {
     fetchCompanies();
   }, []);
+
   const TableWithLoader = withLoader(Table);
+  const ChartWithLoader = withLoader(Chart);
 
   return (
     <>
       <Form dispatch={dispatch} companies={companies} />
-      <TableWithLoader items={prices} fields={tableFields} isLoading={loading} />
+      <ChartWithLoader
+        data={state.prices}
+        isLoading={loading}
+        loadingMessage={chartLoadingMessage}
+      />
+      <TableWithLoader
+        items={prices}
+        fields={tableFields}
+        isLoading={loading}
+        loadingMessage={tableLoadingMessage}
+      />
     </>
   );
 };

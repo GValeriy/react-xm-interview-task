@@ -104,7 +104,7 @@ export const Form = ({ dispatch, companies }:IFormProps) => {
       <input
         type="date"
         id="start"
-        name="start"
+        name="startDate"
         value={formik.values.startDate}
         onChange={handleDateChange}
       />

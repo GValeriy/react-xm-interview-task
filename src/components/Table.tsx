@@ -3,7 +3,7 @@ import { ITableProps } from '../types';
 
 const Table = ({ items, fields }:ITableProps) => {
   if (!items.length) {
-    return null;
+    return <div>Empty table</div>;
   }
   const noValue = 'N/a';
   const headers = fields.map((fieldName, index) => <th key={index}>{fieldName}</th>);

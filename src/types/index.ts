@@ -33,3 +33,15 @@ export interface ITableProps {
     items: [],
     fields: string[]
 }
+
+export interface IChartProps {
+    data: []
+}
+
+export interface IWithLoaderProps {
+    isLoading: boolean,
+    loadingMessage: string,
+    items?: [],
+    data?: [],
+    fields?: string[]
+}
